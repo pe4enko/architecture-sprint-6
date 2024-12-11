@@ -1,0 +1,85 @@
+Задание 5
+1. 
+Ключевые операции:
+Получение базовой информации о клиенте по id.
+Получение списка документов клиента по id.
+Получение информации о родственниках клиента по id.
+
+Основные ресурсы:
+Клиент.
+Документы клиента.
+Родственники клиента.
+
+2. Эквивалентная схема GraphQL
+
+
+type Query {
+  # Основной запрос для получения информации о клиенте
+  client(id: ID!): Client
+}
+
+type Client {
+  id: ID!
+  name: String!
+  age: Int!
+  documents: [Document!]!
+  relatives: [Relative!]!
+}
+
+type Document {
+  id: ID!
+  type: String!
+  number: String!
+  issueDate: String!
+  expiryDate: String!
+}
+
+type Relative {
+  id: ID!
+  relationType: String!
+  name: String!
+  age: Int!
+}
+
+3. Примеры запросов
+query {
+  client(id: "123") {
+    id
+    name
+    age
+  }
+}
+
+query {
+  client(id: "123") {
+    id
+    name
+    documents {
+      id
+      type
+      number
+    }
+  }
+}
+
+query {
+  client(id: "123") {
+    id
+    name
+    age
+    documents {
+      id
+      type
+      number
+      issueDate
+      expiryDate
+    }
+    relatives {
+      id
+      relationType
+      name
+      age
+    }
+  }
+}
+
